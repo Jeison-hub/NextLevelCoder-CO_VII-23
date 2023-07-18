@@ -5,7 +5,7 @@ if __name__ == "__main__":
     game.run()
 
 
-    # ===== Investigar Herencia
-    # == que es un sprite. pygame rect
+    
+    
    
     
