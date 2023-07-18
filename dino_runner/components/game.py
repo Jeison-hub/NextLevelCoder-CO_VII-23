@@ -1,5 +1,5 @@
 import pygame
-
+from dino_runner.components.obstacles.obstacle_control import ObstacleControl
 from dino_runner.utils.constants import (
     BG, 
     ICON, 
@@ -20,9 +20,9 @@ class Game:
         self.playing = False
         self.game_speed = 20
         self.x_pos_bg = 0
-        self.y_pos_bg = 380
+        self.y_pos_bg = 0
         self.player = Dinosaur()
-
+        self.obstacle_control = ObstacleControl()
 
 
     def run(self):
@@ -41,12 +41,14 @@ class Game:
 
     def update(self):
         self.player.update(pygame.key.get_pressed())
+        self.obstacle_control.update(self)
 
     def draw(self):
         self.clock.tick(FPS)
-        self.screen.fill((255, 255, 255))
+        self.screen.fill((34, 113, 179))
         self.draw_background()
         self.player.draw(self.screen)
+        self.obstacle_control.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
         

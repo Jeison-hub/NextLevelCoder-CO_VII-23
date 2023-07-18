@@ -5,8 +5,8 @@ from dino_runner.utils.constants import RUNNING, DUCKING, JUMPING, CLOUD
 
 class Dinosaur(Sprite):
     POS_X = 80
-    POS_Y = 310
-    DUCK_POS_Y = 340
+    POS_Y = 480
+    DUCK_POS_Y = 500
     JUMP_VEL = 8
 
     def __init__(self):
@@ -20,10 +20,9 @@ class Dinosaur(Sprite):
         self.ducking = False
         self.jumping = False
         self.jumping_velocity = self.JUMP_VEL
-        self.cloud_obj1 = CLOUD(CLOUD, 600, 80)
-        self.cloud_obj2 = CLOUD(CLOUD, 1000, 120)
+     
 
-    def update(self, user_input,speed):
+    def update(self, user_input,):
         if self.jumping:
             self.jump()
         if self.ducking:
@@ -46,13 +45,9 @@ class Dinosaur(Sprite):
             self.ducking = False
             self.jumping = False
 
-        self.cloud_obj1.update(speed * 0.5)
-        self.cloud_obj2.update(speed * 0.5)
+    
 
     def draw(self, screen):
-        self.cloud_obj1.draw(screen)
-        self.cloud_obj2.draw(screen)
-     
         screen.blit(self.image, self.rect)
 
     def run(self):
