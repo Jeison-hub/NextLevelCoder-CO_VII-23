@@ -1,16 +1,20 @@
 import pygame
-from pygame.sprite import Sprite
-from dino_runner.utils.constants import RUNNING, DUCKING, JUMPING, CLOUD
 
+from pygame.sprite import Sprite
+from dino_runner.utils.constants import (
+    RUNNING,
+    DUCKING,
+    JUMPING
+)
 
 class Dinosaur(Sprite):
+
     POS_X = 80
-    POS_Y = 480
-    DUCK_POS_Y = 500
-    JUMP_VEL = 8
+    POS_Y = 450
+    DUCK_POS_Y = 340
+    JUMP_VEL = 8.5
 
     def __init__(self):
-        super().__init__()
         self.image = RUNNING[0]
         self.rect = self.image.get_rect()
         self.rect.x = self.POS_X
@@ -20,23 +24,19 @@ class Dinosaur(Sprite):
         self.ducking = False
         self.jumping = False
         self.jumping_velocity = self.JUMP_VEL
-     
 
-    def update(self, user_input,):
+    def update(self, user_input):
         if self.jumping:
             self.jump()
         if self.ducking:
             self.duck()
         if self.running:
             self.run()
-        if self.step_index >= 10:
-            self.step_index = 0
-
         if (user_input[pygame.K_DOWN] or user_input[pygame.K_s]) and not self.jumping:
             self.running = False
             self.ducking = True
             self.jumping = False
-        elif user_input[pygame.K_UP] or user_input[pygame.K_w]:
+        elif user_input[pygame.K_UP] and not self.jumping:
             self.running = False
             self.ducking = False
             self.jumping = True
@@ -45,7 +45,8 @@ class Dinosaur(Sprite):
             self.ducking = False
             self.jumping = False
 
-    
+        if self.step_index >= 10:
+            self.step_index = 0
 
     def draw(self, screen):
         screen.blit(self.image, self.rect)
@@ -59,9 +60,10 @@ class Dinosaur(Sprite):
 
     def jump(self):
         self.image = JUMPING
-        self.rect.y -= self.jumping_velocity * 4
-        self.jumping_velocity -= 0.8
-        if self.rect.y >= self.POS_Y:
+        if self.jumping:
+            self.rect.y -= self.jumping_velocity * 4
+            self.jumping_velocity -= 0.8
+        if self.jumping_velocity < -self.JUMP_VEL:
             self.rect.y = self.POS_Y
             self.jumping = False
             self.jumping_velocity = self.JUMP_VEL
