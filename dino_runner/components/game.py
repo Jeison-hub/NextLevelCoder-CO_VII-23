@@ -26,6 +26,8 @@ class Game:
         self.obstacle_manager = ObstacleManager(self)
         self.powerup_manager = PowerUpManager(self)
         self.score = 0
+        self.font = pygame.font.Font(None, 36)
+
 
     def run(self):
         self.playing = True
@@ -54,13 +56,12 @@ class Game:
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.powerup_manager.draw(self.screen)
+        self.draw_score()
         pygame.display.update()
         pygame.display.flip()
         
-
     def increase_score(self):
         self.score += 1
-
 
     def draw_background(self):
         image_width = BG.get_width()
@@ -70,3 +71,8 @@ class Game:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
+
+    def draw_score(self):
+        score_text = f"Score: {self.score}"
+        text_surface = self.font.render(score_text, True, (255, 255, 255))
+        self.screen.blit(text_surface, (10, 10))
