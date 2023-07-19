@@ -7,7 +7,8 @@ class Bird(Obstacle):
         image_list = BIRD
         selected_image = random.choice(image_list)
         super().__init__(selected_image)
-        self.rect.y = 150
+        self.rect.y = 350
+    
 
     def fly(self):
         self.image = BIRD[0] if self.step_index < 5 else Bird[1]

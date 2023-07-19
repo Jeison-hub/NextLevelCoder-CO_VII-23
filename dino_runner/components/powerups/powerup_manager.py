@@ -19,6 +19,7 @@ class PowerUpManager:
             self.has_powerup = self.powerup.update(game.game_speed)
             if game.player.rect.colliderect(self.powerup.rect):
                 self.has_powerup = False
+                game.player.type = self.powerup.type
 
     def create_powerup(self):
         self.powerup = Shield()
