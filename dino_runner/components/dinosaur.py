@@ -9,7 +9,7 @@ from dino_runner.utils.constants import (
     DUCKING,
     JUMPING,
     DEFAULT_TYPE,
-    SHIELD_TYPE
+    SHIELD_TYPE,
 )
 
 class Dinosaur(Sprite):

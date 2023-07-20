@@ -8,5 +8,9 @@ class Cactus(Obstacle):
         image_list = SMALL_CACTUS + LARGE_CACTUS
         selected_image = random.choice(image_list)
         super().__init__(selected_image)
-        self.rect.y = 460
+
+        if selected_image in SMALL_CACTUS:
+            self.rect.y = 500  # Posición más baja para cactus pequeños
+        else:
+            self.rect.y = 450  # Posición más alta para cactus grandes
         

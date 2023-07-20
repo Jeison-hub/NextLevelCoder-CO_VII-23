@@ -46,6 +46,8 @@ class Game:
         self.player.update(pygame.key.get_pressed())
         self.obstacle_manager.update(self.screen)
         self.powerup_manager.update(self.screen)
+        self.score += 1
+
         
 
     def draw(self):
@@ -56,8 +58,13 @@ class Game:
         self.obstacle_manager.draw(self.screen)
         self.powerup_manager.draw(self.screen)
         pygame.display.update()
-        pygame.display.flip()
         
+        font = pygame.font.Font(None, 36)
+        score_text = font.render(f"Score: {self.score}", True, (0, 0, 0))
+        score_rect = score_text.get_rect()
+        score_rect.topright = (SCREEN_HEIGHT -10, 10)
+        self.screen.blit(score_text, score_rect)
+        pygame.display.flip()
     
     def draw_background(self):
         image_width = BG.get_width()

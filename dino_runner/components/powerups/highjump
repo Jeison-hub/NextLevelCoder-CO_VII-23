@@ -1,0 +1,9 @@
+
+from dino_runner.components.powerups.powerup import PowerUp
+from dino_runner.utils.constants import HIGHJUMP, HIGHJUMP_TYPE
+
+class HighJump(PowerUp):
+    def __init__(self):
+        selected_image = HIGHJUMP
+        super().__init__(selected_image)
+        self.type = HIGHJUMP_TYPE
